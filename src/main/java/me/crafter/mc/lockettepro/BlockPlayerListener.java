@@ -64,6 +64,10 @@ public class BlockPlayerListener implements Listener {
                     event.setCancelled(true);
                     // Check lock info info
                     if (!locked && !LocketteProAPI.isUpDownLockedDoor(block)) {
+                        if (!Utils.checkCanPlaceAt(block, blockface, player, player.getInventory().getItemInMainHand(), event.getHand())) {
+                            Utils.sendMessages(player, Config.getLang("cannot-lock-quick"));
+                            return;
+                        }
                         // Get type
                         Material signType = player.getInventory().getItemInMainHand().getType();
                         // Not locked, not a locked door nearby
@@ -84,12 +88,20 @@ public class BlockPlayerListener implements Listener {
                         }
                         Dependency.logPlacement(player, newsign);
                     } else if (!locked && LocketteProAPI.isOwnerUpDownLockedDoor(block, player)) {
+                        if (!Utils.checkCanPlaceAt(block, blockface, player, player.getInventory().getItemInMainHand(), event.getHand())) {
+                            Utils.sendMessages(player, Config.getLang("cannot-lock-quick"));
+                            return;
+                        }
                         // Not locked, (is locked door nearby), is owner of locked door nearby
                         Utils.removeASign(player);
                         Utils.sendMessages(player, Config.getLang("additional-sign-added-quick"));
                         Utils.putSignOn(block, blockface, Config.getDefaultAdditionalString(), "", player.getInventory().getItemInMainHand().getType());
                         Dependency.logPlacement(player, block.getRelative(blockface));
                     } else if (LocketteProAPI.isOwner(block, player)) {
+                        if (!Utils.checkCanPlaceAt(block, blockface, player, player.getInventory().getItemInMainHand(), event.getHand())) {
+                            Utils.sendMessages(player, Config.getLang("cannot-lock-quick"));
+                            return;
+                        }
                         // Locked, (not locked door nearby), is owner of locked block
                         Utils.removeASign(player);
                         Utils.putSignOn(block, blockface, Config.getDefaultAdditionalString(), "", player.getInventory().getItemInMainHand().getType());

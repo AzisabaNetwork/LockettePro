@@ -15,6 +15,8 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
@@ -332,4 +334,9 @@ public class Utils {
         }
     }
 
+    public static boolean checkCanPlaceAt(Block block, BlockFace blockFace, Player player, ItemStack itemInHand, EquipmentSlot slot) {
+        BlockPlaceEvent event = new BlockPlaceEvent(block.getRelative(blockFace), block.getRelative(blockFace).getState(), block, itemInHand, player, true, slot);
+        Bukkit.getPluginManager().callEvent(event);
+        return !event.isCancelled();
+    }
 }
