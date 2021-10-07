@@ -34,11 +34,16 @@ public class Dependency {
             permission = rsp.getProvider();
         }
 
-        if (Config.coreprotect && Bukkit.getPluginManager().getPlugin("CoreProtect") != null && CoreProtect.getInstance().getAPI().APIVersion() == 6) {
-            coreProtectAPI = CoreProtect.getInstance().getAPI();
-            if (!coreProtectAPI.isEnabled()) {
-                coreProtectAPI = null;
+        if (Config.coreprotect && Bukkit.getPluginManager().getPlugin("CoreProtect") != null) {
+            CoreProtect cp = CoreProtect.getInstance();
+            if (cp == null) {
                 plugin.getLogger().warning("CoreProtect API is not enabled!");
+            } else {
+                coreProtectAPI = cp.getAPI();
+                if (!coreProtectAPI.isEnabled() || coreProtectAPI.APIVersion() != 6) {
+                    coreProtectAPI = null;
+                    plugin.getLogger().warning("CoreProtect API is not enabled or incompatible!");
+                }
             }
         }
     }
