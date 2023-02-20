@@ -1,11 +1,4 @@
-# LockettePro [![Build Status](https://ci.nyaacat.com/job/LockettePro/job/1.17/badge/icon?style=flat-square)](https://ci.nyaacat.com/job/LockettePro/job/1.17/)
-
-***WARNING: Versions for Minecraft 1.15.x are not fully tested yet.***
-Please create an issus if you find anything wrong. Thank you.
-For Minecraft 1.14.4, please download [build \#9](https://ci.nyaacat.com/job/LockettePro/9/).
-
-All versions can be found at [Nyaa CI server](https://ci.nyaacat.com/job/LockettePro/) and
-[Github Release Page](https://github.com/NyaaCat/LockettePro/releases).
+# LockettePro
 
 ### LockettePro - A much better Lockette plugin for Bukkit
 
