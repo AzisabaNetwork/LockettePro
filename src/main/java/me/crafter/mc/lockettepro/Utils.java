@@ -38,7 +38,7 @@ public class Utils {
 
     private static final LoadingCache<UUID, Block> selectedsign = CacheBuilder.newBuilder()
             .expireAfterAccess(30, TimeUnit.SECONDS)
-            .build(new CacheLoader<>() {
+            .build(new CacheLoader<UUID, Block>() {
                 public Block load(UUID key) {
                     return null;
                 }

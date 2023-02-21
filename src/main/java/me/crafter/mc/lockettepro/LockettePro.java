@@ -99,7 +99,7 @@ public class LockettePro extends JavaPlugin {
             } else {
                 // The following commands does not require player
                 switch (args[0]) {
-                    case "reload" -> {
+                    case "reload": {
                         if (sender.hasPermission("lockettepro.reload")) {
                             if (Bukkit.getPluginManager().getPlugin("ProtocolLib") != null) {
                                 DependencyProtocolLib.cleanUpProtocolLib(this);
@@ -114,7 +114,7 @@ public class LockettePro extends JavaPlugin {
                         }
                         return true;
                     }
-                    case "version" -> {
+                    case "version": {
                         if (sender.hasPermission("lockettepro.version")) {
                             sender.sendMessage(plugin.getDescription().getFullName());
                         } else {
@@ -122,7 +122,7 @@ public class LockettePro extends JavaPlugin {
                         }
                         return true;
                     }
-                    case "debug" -> {
+                    case "debug": {
                         // This is not the author debug, this prints out info
                         if (sender.hasPermission("lockettepro.debug")) {
                             sender.sendMessage("LockettePro Debug Message");

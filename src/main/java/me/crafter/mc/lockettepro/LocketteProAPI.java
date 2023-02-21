@@ -537,16 +537,18 @@ public class LocketteProAPI {
     }
 
     public static boolean isSingleDoorBlock(Block block) {
-        return switch (block.getType()) {
-            case OAK_FENCE_GATE,
-                    SPRUCE_FENCE_GATE,
-                    BIRCH_FENCE_GATE,
-                    JUNGLE_FENCE,
-                    ACACIA_DOOR,
-                    DARK_OAK_DOOR,
-                    IRON_TRAPDOOR -> true;
-            default -> false;
-        };
+        switch (block.getType()) {
+            case OAK_FENCE_GATE:
+            case SPRUCE_FENCE_GATE:
+            case BIRCH_FENCE_GATE:
+            case JUNGLE_FENCE:
+            case ACACIA_DOOR:
+            case DARK_OAK_DOOR:
+            case IRON_TRAPDOOR: {
+                return true;
+            }
+            default: return false;
+        }
     }
 
     public static Block getBottomDoorBlock(Block block) { // Requires isDoubleDoorBlock || isSingleDoorBlock

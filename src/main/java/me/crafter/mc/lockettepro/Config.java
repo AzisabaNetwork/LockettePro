@@ -59,10 +59,19 @@ public class Config {
         String enablequickprotectstring = config.getString("enable-quick-protect", "true");
 
         switch (enablequickprotectstring.toLowerCase()) {
-            case "true" -> enablequickprotect = 1;
-            case "false" -> enablequickprotect = 0;
-            case "sneak" -> enablequickprotect = 2;
-            default -> enablequickprotect = 1;
+            case "true": {
+                enablequickprotect = 1;
+                break;
+            }
+            case "false": {
+                enablequickprotect = 0;
+                break;
+            }
+            case "sneak": {
+                enablequickprotect = 2;
+                break;
+            }
+            default: enablequickprotect = 1;
         }
         blockinterfereplacement = config.getBoolean("block-interfere-placement", true);
         blockitemtransferin = config.getBoolean("block-item-transfer-in", false);
@@ -94,10 +103,19 @@ public class Config {
 
         String blockhopperminecartstring = config.getString("block-hopper-minecart", "remove");
         switch (blockhopperminecartstring.toLowerCase()) {
-            case "true" -> blockhopperminecart = 1;
-            case "false" -> blockhopperminecart = 0;
-            case "remove" -> blockhopperminecart = 2;
-            default -> blockhopperminecart = 2;
+            case "true": {
+                blockhopperminecart = 1;
+                break;
+            }
+            case "false": {
+                blockhopperminecart = 0;
+                break;
+            }
+            case "remove": {
+                blockhopperminecart = 2;
+                break;
+            }
+            default: blockhopperminecart = 2;
         }
 
         lockexpire = config.getBoolean("lock-expire", false);
