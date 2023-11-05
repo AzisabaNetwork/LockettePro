@@ -43,7 +43,7 @@ public class BlockPlayerListener implements Listener {
             // Check quick lock action correctness
             if (!((event.getPlayer().isSneaking() && Config.getQuickProtectAction() == (byte) 2) ||
                     (!event.getPlayer().isSneaking() && Config.getQuickProtectAction() == (byte) 1))) return;
-            // Check permission 
+            // Check permission
             if (!player.hasPermission("lockettepro.lock")) return;
             // Get target block to lock
             BlockFace blockface = event.getBlockFace();
@@ -273,6 +273,7 @@ public class BlockPlayerListener implements Listener {
             case RIGHT_CLICK_BLOCK:
                 Player player = event.getPlayer();
                 if (((LocketteProAPI.isLocked(block) && !LocketteProAPI.isUser(block, player)) ||
+                        LocketteProAPI.isLockSignOrAdditionalSign(block) ||
                         (LocketteProAPI.isUpDownLockedDoor(block) && !LocketteProAPI.isUserUpDownLockedDoor(block, player)))
                         && !player.hasPermission("lockettepro.admin.use")) {
                     Utils.sendMessages(player, Config.getLang("block-is-locked"));
