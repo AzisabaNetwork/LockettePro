@@ -273,8 +273,8 @@ public class BlockPlayerListener implements Listener {
             case RIGHT_CLICK_BLOCK:
                 Player player = event.getPlayer();
                 if (((LocketteProAPI.isLocked(block) && !LocketteProAPI.isUser(block, player)) ||
-                        LocketteProAPI.isLockSignOrAdditionalSign(block) ||
-                        (LocketteProAPI.isUpDownLockedDoor(block) && !LocketteProAPI.isUserUpDownLockedDoor(block, player)))
+                        (LocketteProAPI.isUpDownLockedDoor(block) && !LocketteProAPI.isUserUpDownLockedDoor(block, player)) ||
+                        (action == Action.RIGHT_CLICK_BLOCK && LocketteProAPI.isLockSignOrAdditionalSign(block)))
                         && !player.hasPermission("lockettepro.admin.use")) {
                     Utils.sendMessages(player, Config.getLang("block-is-locked"));
                     event.setCancelled(true);
