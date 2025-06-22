@@ -1,5 +1,6 @@
 package me.crafter.mc.lockettepro;
 
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.DoubleChest;
@@ -11,7 +12,11 @@ import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
+import java.util.ArrayList;
+
 public class BlockInventoryMoveListener implements Listener {
+
+    private final ArrayList<Location> isKnownAsNotLocked = new ArrayList<>();
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
     public void onInventoryMove(InventoryMoveItemEvent event) {
@@ -49,10 +54,21 @@ public class BlockInventoryMoveListener implements Listener {
 
     public boolean isInventoryLocked(Inventory inventory) {
         InventoryHolder inventoryholder = inventory.getHolder();
+
         if (inventoryholder instanceof DoubleChest) {
+            if (isKnownAsNotLocked.contains(inventory.getLocation())) {
+                return false;
+            }
+
             inventoryholder = ((DoubleChest) inventoryholder).getLeftSide();
-        }
-        if (inventoryholder instanceof BlockState) {
+            Block block = ((BlockState) inventoryholder).getBlock();
+            if (LocketteProAPI.isLocked(block)){
+                return true;
+            } else {
+                isKnownAsNotLocked.add(inventory.getLocation());
+                return false;
+            }
+        } else if (inventoryholder instanceof BlockState) {
             Block block = ((BlockState) inventoryholder).getBlock();
             if (Config.isCacheEnabled()) { // Cache is enabled
                 if (Utils.hasValidCache(block)) {
